@@ -1,3 +1,4 @@
+import Link from 'next/link'
 import React from 'react'
 
 export default function Navbar() {
@@ -7,7 +8,7 @@ export default function Navbar() {
       <nav>
         <ul className='flex gap-7'>
             <li><a href="">Home</a></li>
-            <li><a href="/shop">Shop</a></li>
+            <li><Link href="/images/artist.png" />Shop</li>
             <li>About us</li>
         </ul>
       </nav>
