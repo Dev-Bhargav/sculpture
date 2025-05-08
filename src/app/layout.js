@@ -1,5 +1,10 @@
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono, Libre_Franklin } from "next/font/google";
 import "./globals.css";
+
+const libreFranklin = Libre_Franklin({
+  variable: "--font-libre-franklin",
+  subsets: ["latin"]
+})
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
