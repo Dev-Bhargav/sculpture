@@ -24,8 +24,8 @@ export default function Page() {
       <div className="h-fit w-[70vw]">
         <div className="flex flex-wrap gap-10 p-4">
           {Array.from({ length: 3 }).map((_, i) => (
-            <div className="cursor-pointer">
-              <div className=" h-10/12 bg-[#e2e2e2] rounded-t-sm px-4 " key={i}>
+            <div className="cursor-pointer" key={i}>
+              <div className=" h-10/12 bg-[#e2e2e2] rounded-t-sm px-4 ">
                 <Image
                   src={`/images/p${i + 1}.png`}
                   height={150}
