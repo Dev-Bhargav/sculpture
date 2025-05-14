@@ -1,10 +1,11 @@
 import { Geist, Geist_Mono, Libre_Franklin } from "next/font/google";
 import "./globals.css";
+import Navbar from "./components/Navbar";
 
 const libreFranklin = Libre_Franklin({
   variable: "--font-libre-franklin",
-  subsets: ["latin"]
-})
+  subsets: ["latin"],
+});
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -25,8 +26,9 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
+        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
+        <Navbar></Navbar>
         {children}
       </body>
     </html>
