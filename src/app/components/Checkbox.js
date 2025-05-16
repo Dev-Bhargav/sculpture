@@ -1,15 +1,20 @@
 import React from "react";
 
-export default function Checkbox({label}) {
+export default function Checkbox({ label, sortOption, value, setSortOption }) {
   return (
     <div>
       <label className="inline-flex items-center space-x-1 cursor-pointer">
-            <input
-              type="checkbox"
-              className="peer hidden"
-            />
-            <span
-              className="
+        <input
+          type="radio"
+          name="sort"
+          className="peer hidden"
+          value={value}
+          onChange={(e) => {
+            setSortOption(e.target.value);
+          }}
+        />
+        <span
+          className="
                 relative w-5 h-5 rounded-full border-2 border-gray-300
                 after:content-['']
                 after:absolute
@@ -22,9 +27,9 @@ export default function Checkbox({label}) {
                 peer-checked:after:scale-100
                 transition-all duration-200
               "
-            ></span>
-            <span className="pt-0.5 select-none">{label}</span>
-          </label>
+        ></span>
+        <span className="pt-0.5 select-none">{label}</span>
+      </label>
     </div>
   );
 }

@@ -3,18 +3,18 @@ import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="font-[family-name:var(--font-geist-sans)]">
-      <div className="flex gap-10 p-10 w-dvw h-[80vh] items-center relative">
-        <div className="h-full w-3/4 relative">
+    <div className="">
+      <div className="flex flex-col md:flex-row gap-4 md:gap-10  p-5 md:p-10 w-dvw h-[80vh] items-center relative">
+        <div className="h-full w-full md:w-3/4 relative">
           <Image
             fill
-            objectFit="cover"
+            style={{ objectFit: "cover" }}
             alt="Picture of an artist"
             src="/images/artist.png"
           />
         </div>
-        <div className=" w-2/4 flex flex-col items-start gap-3">
-          <h2 className="text-3xl font-bold">
+        <div className="w-full md:w-2/4 flex flex-col items-start gap-3">
+          <h2 className="text-2xl leading-7 md:leading-tight md:text-3xl font-bold">
             Discover the Art of Sculpture – Where Every Shape Tells a Story
           </h2>
           <p className="opacity-50 leading-[1.3]">
