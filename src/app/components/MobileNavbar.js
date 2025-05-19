@@ -31,7 +31,8 @@ export default function MobileNavbar({ show, onClose }) {
                 Shop
               </Link>
               <Link
-                href="/"
+                href="/about-us"
+                onClick={onClose}
                 className="active:text-[var(--primary)] active:underline"
               >
                 About us

@@ -5,7 +5,12 @@ import Checkbox from "./Checkbox";
 import PriceFilter from "./PriceFilter";
 import { X } from "lucide-react";
 
-export default function MobileFilterSheet({ show, onClose }) {
+export default function MobileFilterSheet({
+  show,
+  onClose,
+  setSortOption,
+  sortOption,
+}) {
   // Prevent background scroll when open
   useEffect(() => {
     if (show) {
@@ -35,14 +40,25 @@ export default function MobileFilterSheet({ show, onClose }) {
         <div className="p-4">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-lg font-bold">Filter</h2>
-            <X onClick={onClose}/>
+            <X onClick={onClose} />
           </div>
           <div className="space-y-3">
             <h3 className="font-semibold text-lg">Sort by</h3>
             <div className="space-y-1">
-              <Checkbox label="Price: low to high" />
-              <Checkbox label="Price: high to low" />
-              <Checkbox label="Latest" />
+              <Checkbox
+                label="Price: low to high"
+                setSortOption={setSortOption}
+                sortOption={sortOption}
+                value="low-to-high"
+                onClose={onClose}
+              />
+              <Checkbox
+                label="Price: high to low"
+                setSortOption={setSortOption}
+                sortOption={sortOption}
+                value="high-to-low"
+                onClose={onClose}
+              />
             </div>
             <h3 className="font-semibold text-lg mt-4">Price</h3>
             <PriceFilter />

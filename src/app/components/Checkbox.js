@@ -1,6 +1,11 @@
 import React from "react";
 
-export default function Checkbox({ label, sortOption, value, setSortOption }) {
+export default function Checkbox({
+  label,
+  value,
+  setSortOption,
+  onClose = undefined,
+}) {
   return (
     <div>
       <label className="inline-flex items-center space-x-1 cursor-pointer">
@@ -11,6 +16,9 @@ export default function Checkbox({ label, sortOption, value, setSortOption }) {
           value={value}
           onChange={(e) => {
             setSortOption(e.target.value);
+            if (onClose) {
+              onClose();
+            }
           }}
         />
         <span
