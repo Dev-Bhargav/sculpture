@@ -14,9 +14,11 @@ export default function Page() {
   const [sortOption, setSortOption] = useState("");
   const [filterOption, setFilterOption] = useState("");
   const [productData, setProductsData] = useState([...products]);
+  const [selected, setSelected] = useState(null);
+
 
   useEffect(() => {
-    let updatedData = [...productData];
+    let updatedData = [...products];
 
     if (filterOption) {
       updatedData = updatedData.filter((item) => {
@@ -36,7 +38,7 @@ export default function Page() {
         }
       });
     }
-
+    console.log(sortOption)
     if (sortOption) {
       updatedData.sort((a, b) => {
         switch (sortOption) {
@@ -52,6 +54,13 @@ export default function Page() {
 
     setProductsData(updatedData);
   }, [sortOption, filterOption]);
+
+  const removeFilter = () => {
+    setFilterOption("");
+    setSortOption("");
+    setSelected(null)
+  };
+
 
   return (
     <div>
@@ -73,10 +82,19 @@ export default function Page() {
         sortOption={sortOption}
       />
 
-      <div className="flex justify-between lg:justify-around gap-4 lg:gap-0 lg:px-10 mt-10">
-        <div className="h-fit w-[20vw] min-w-[230px] py-3 hidden lg:block">
-          <div className="flex flex-col gap-3">
-            <h1 className="font-semibold text-lg">SORT BY</h1>
+      <div className="flex justify-between lg:justify-normal gap-4 lg:gap-10 lg:px-10 mt-10">
+        <div className="h-fit w-[300px] min-w-[230px] py-3 hidden lg:block">
+          <div className="flex justify-between items-center py-3 border-b-1 border-gray-300">
+            <h1 className="font-bold text-lg">FILTER & SORT</h1>
+            <button
+              onClick={removeFilter}
+              className="text-sm text-gray-500 cursor-pointer disabled:text-gray-300"
+            >
+              Clear all
+            </button>
+          </div>
+          <div className="flex flex-col gap-3 border-b-1 border-b-gray-300 py-3">
+            <h1 className="font-bold text-lg">SORT BY</h1>
             <div className="mx-3">
               <Checkbox
                 label="Price: low to high"
@@ -90,10 +108,13 @@ export default function Page() {
                 sortOption={sortOption}
                 value="high-to-low"
               />
-              {/* <Checkbox label="Latest" setSortOption={setSortOption} sortOption={sortOption} value={"low-to-high"}/> */}
             </div>
-            <h1 className="font-semibold text-lg">PRICE</h1>
-            <PriceFilter setFilterOption={setFilterOption} />
+          </div>
+          <div className="mt-3 py-3 border-b-1 border-gray-300">
+            <h1 className="font-bold text-lg">PRICE</h1>
+            <div className="m-3">
+              <PriceFilter filterOption={filterOption} selected={selected} setSelected={setSelected}  setFilterOption={setFilterOption} />
+            </div>
           </div>
         </div>
         <div className="w-full lg:w-[70vw]">

@@ -43,10 +43,10 @@ export default async function page({ params }) {
               <span>Teal</span>
             </div>
           </div>
-          <p className="text-gray-500">
+          <p className="text-[#828282]">
             {` A minimalist, earthy-toned digital illustration featuring a stylized half-face design. Crafted with soft, warm neutrals and clean lines, this artwork blends elegance with introspective expression—perfect for modern spaces, portfolios, or branding visuals.`}
           </p>
-          <button className="bg-[#FF4E14] w-full rounded-sm text-white font-semibold py-2 px-7 lg:rounded-sm cursor-pointer ">
+          <button className="bg-[#FF4E14] w-full text-white rounded-sm font-semibold py-2 px-7 lg:rounded-sm cursor-pointer ">
             Buy Now
           </button>
         </div>

@@ -9,11 +9,11 @@ export default function Navbar() {
   const [show, setShow] = useState(false);
 
   return (
-    <div className="flex justify-between bg-[#F2F3F4] py-3 px-4 items-center top-0 sticky z-50">
+    <div className="flex justify-between bg-[var(--navbar)] py-3 px-4 items-center top-0 sticky z-50">
       <div className="flex items-center gap-12">
         <Link
           href="/"
-          className="font-black text-3xl md:text-4xl text-black px-2 rounded-sm"
+          className="font-black text-3xl md:text-4xl px-2 rounded-sm"
         >
           Desgin Wizards<span className="text-[var(--primary)] text-[40px] font-[--font-geist-sans]">.</span>
         </Link>

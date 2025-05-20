@@ -8,7 +8,7 @@ const products = [
     src: "/images/p3.png",
     slug: "the-dragon",
   },
-  { id: 4, name: "Demon", price: 50, src: "/images/p4.png", slug: "the-dragon" },
+  { id: 4, name: "Demon", price: 50, src: "/images/p4.png", slug: "the-demon" },
 ];
 
 export default products;

@@ -3,6 +3,7 @@ import React from "react";
 export default function Checkbox({
   label,
   value,
+  sortOption,
   setSortOption,
   onClose = undefined,
 }) {
@@ -12,6 +13,7 @@ export default function Checkbox({
         <input
           type="radio"
           name="sort"
+          checked={sortOption == value}
           className="peer hidden"
           value={value}
           onChange={(e) => {
