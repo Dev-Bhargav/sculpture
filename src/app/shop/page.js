@@ -4,7 +4,7 @@ import React, { useEffect, useState } from "react";
 import Checkbox from "../components/Checkbox";
 import PriceFilter from "../components/PriceFilter";
 import Image from "next/image";
-import { Filter } from "lucide-react";
+import { SlidersHorizontal } from "lucide-react";
 import MobileFilterSheet from "../components/MobileFilterSheet";
 import products from "../data/products";
 import Link from "next/link";
@@ -15,7 +15,6 @@ export default function Page() {
   const [filterOption, setFilterOption] = useState("");
   const [productData, setProductsData] = useState([...products]);
   const [selected, setSelected] = useState(null);
-
 
   useEffect(() => {
     let updatedData = [...products];
@@ -38,7 +37,6 @@ export default function Page() {
         }
       });
     }
-    console.log(sortOption)
     if (sortOption) {
       updatedData.sort((a, b) => {
         switch (sortOption) {
@@ -58,9 +56,8 @@ export default function Page() {
   const removeFilter = () => {
     setFilterOption("");
     setSortOption("");
-    setSelected(null)
+    setSelected(null);
   };
-
 
   return (
     <div>
@@ -70,7 +67,7 @@ export default function Page() {
           onClick={() => setShowFilter(true)}
           className="border border-[var(--primary)] text-[var(--primary)] cursor-pointer font-semibold px-2 py-1 rounded-sm inline-flex items-center gap-1"
         >
-          <Filter size={18} /> Filter
+          <SlidersHorizontal size={18} /> Filter
         </button>
       </section>
 
@@ -82,13 +79,13 @@ export default function Page() {
         sortOption={sortOption}
       />
 
-      <div className="flex justify-between lg:justify-normal gap-4 lg:gap-10 lg:px-10 mt-10">
+      <div className="flex justify-between lg:justify-normal gap-4 lg:gap-10 lg:px-10 lg:mt-10">
         <div className="h-fit w-[300px] min-w-[230px] py-3 hidden lg:block">
           <div className="flex justify-between items-center py-3 border-b-1 border-gray-300">
             <h1 className="font-bold text-lg">FILTER & SORT</h1>
             <button
               onClick={removeFilter}
-              className="text-sm text-gray-500 cursor-pointer disabled:text-gray-300"
+              className={`text-sm ${ filterOption || sortOption ? "text-gray-500 cursor-pointer" : "text-gray-300 cursor-not-allowed"}`}
             >
               Clear all
             </button>
@@ -113,7 +110,12 @@ export default function Page() {
           <div className="mt-3 py-3 border-b-1 border-gray-300">
             <h1 className="font-bold text-lg">PRICE</h1>
             <div className="m-3">
-              <PriceFilter filterOption={filterOption} selected={selected} setSelected={setSelected}  setFilterOption={setFilterOption} />
+              <PriceFilter
+                filterOption={filterOption}
+                selected={selected}
+                setSelected={setSelected}
+                setFilterOption={setFilterOption}
+              />
             </div>
           </div>
         </div>
@@ -125,7 +127,7 @@ export default function Page() {
                 className="cursor-pointer"
                 key={index}
               >
-                <div className="h-fit bg-[#e2e2e2] rounded-t-sm px-2 flex justify-center">
+                <div className="h-fit bg-[#F2F2F2] rounded-t-sm px-2 flex justify-center">
                   <Image
                     src={product.src}
                     height={100}
@@ -136,7 +138,7 @@ export default function Page() {
                 </div>
                 <div className="rounded-b-sm px-2">
                   <p className="text-lg">{product.name}</p>
-                  <p className="text-md opacity-70">${product.price}</p>
+                  <p className="text-md opacity-70">${product.price}.00</p>
                 </div>
               </Link>
             ))}

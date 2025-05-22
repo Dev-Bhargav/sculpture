@@ -1,6 +1,7 @@
 import { Geist, Geist_Mono, Libre_Franklin } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
+import Footer from "./components/Footer";
 
 const libreFranklin = Libre_Franklin({
   variable: "--font-libre-franklin",
@@ -30,6 +31,7 @@ export default function RootLayout({ children }) {
       >
         <Navbar></Navbar>
         {children}
+        <Footer/>
       </body>
     </html>
   );

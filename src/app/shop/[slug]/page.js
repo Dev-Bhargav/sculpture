@@ -1,4 +1,5 @@
 import products from "@/app/data/products";
+import { Star } from "lucide-react";
 import Image from "next/image";
 import { notFound } from "next/navigation";
 import React from "react";
@@ -12,7 +13,7 @@ export default async function page({ params }) {
 
   return (
     <section className="w-full mt-12 lg:mt-20 px-5 sm:px-10 lg:px-20">
-      <div className="w-full flex flex-col lg:flex-row items-center gap-10 justify-center">
+      <div className="w-full flex flex-col lg:flex-row gap-10">
         <div className="image w-fit">
           <div className="bg-[#e2e2e2] xl:max-w-[950px] rounded-sm py-4">
             <Image
@@ -24,28 +25,47 @@ export default async function page({ params }) {
             />
           </div>
         </div>
-        <div className="description lg:w-[40%] flex flex-col gap-5">
+        <div className="description lg:w-[40%] flex flex-col gap-4 mb-5">
+          <div className="flex lg:block items-start justify-between">
+            <div>
+              <h1 className="font-bold text-3xl">{product.name}</h1>
+              <div className="flex py-1 gap-.5">
+                <Star size={18} fill="gold" color="gold" />
+                <Star size={18} fill="gold" color="gold" />
+                <Star size={18} fill="gold" color="gold" />
+                <Star size={18} fill="gold" color="gold" />
+                <Star size={18} fill="gold" color="gold" />
+                <span className="pl-2 text-sm font-semibold text-gray-400">
+                  (32 reviews)
+                </span>
+              </div>
+            </div>
+            <p className="pt-3 inline-flex gap-1 font-bold text-3xl"><span className="text-xl">$</span>{product.price}.00</p>
+          </div>
+
+          <div className="colors">
+            <h1 className="mb-2 py-1 font-bold text-lg">Select Color</h1>
+            <div className="flex gap-2 text-sm text-center text-[#828282]">
+              <div className="px-2">
+                <div className="h-9 w-9 bg- rounded-full bg-gray-300 cursor-pointer" />
+                <span>Gray</span>
+              </div>
+              <div>
+                <div className="h-9 w-9 bg-[#765E5E] rounded-full cursor-pointer" />
+                <span>Brown</span>
+              </div>
+              <div>
+                <div className="h-9 w-9 bg-teal-200 rounded-full cursor-pointer" />
+                <span>Teal</span>
+              </div>
+            </div>
+          </div>
           <div>
-            <h1 className="font-bold text-3xl">{product.name}</h1>
-            <p className="text-gray-500">${product.price}</p>
+            <h1 className="py-1 font-bold text-lg">Description</h1>
+            <p className="text-[#828282] px-2">
+              {` A minimalist, earthy-toned digital illustration featuring a stylized half-face design. Crafted with soft, warm neutrals and clean lines, this artwork blends elegance with introspective expression—perfect for modern spaces, portfolios, or branding visuals.`}
+            </p>
           </div>
-          <div className="flex gap-3">
-            <div>
-              <div className="h-10 w-10 bg- rounded-full bg-gray-300" />
-              <span>Gray</span>
-            </div>
-            <div>
-              <div className="h-10 w-10 bg-[#765E5E] rounded-full " />
-              <span>Brown</span>
-            </div>
-            <div>
-              <div className="h-10 w-10 bg-teal-200 rounded-full " />
-              <span>Teal</span>
-            </div>
-          </div>
-          <p className="text-[#828282]">
-            {` A minimalist, earthy-toned digital illustration featuring a stylized half-face design. Crafted with soft, warm neutrals and clean lines, this artwork blends elegance with introspective expression—perfect for modern spaces, portfolios, or branding visuals.`}
-          </p>
           <button className="bg-[#FF4E14] w-full text-white rounded-sm font-semibold py-2 px-7 lg:rounded-sm cursor-pointer ">
             Buy Now
           </button>
