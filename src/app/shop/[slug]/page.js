@@ -1,3 +1,4 @@
+import StarRating from "@/app/components/StarRating";
 import products from "@/app/data/products";
 import { Star } from "lucide-react";
 import Image from "next/image";
@@ -30,17 +31,17 @@ export default async function page({ params }) {
             <div>
               <h1 className="font-bold text-3xl">{product.name}</h1>
               <div className="flex py-1 gap-.5">
-                <Star size={18} fill="gold" color="gold" />
-                <Star size={18} fill="gold" color="gold" />
-                <Star size={18} fill="gold" color="gold" />
-                <Star size={18} fill="gold" color="gold" />
-                <Star size={18} fill="gold" color="gold" />
-                <span className="pl-2 text-sm font-semibold text-gray-400">
-                  (32 reviews)
+                <StarRating rating={product.rating} />
+                <p className="text-sm pl-2 font-semibold">{product.rating}</p>
+                <span className="pl-1 text-sm font-semibold text-gray-400">
+                  ({product.reviews} reviews)
                 </span>
               </div>
             </div>
-            <p className="pt-3 inline-flex gap-1 font-bold text-3xl"><span className="text-xl">$</span>{product.price}.00</p>
+            <p className="pt-3 inline-flex gap-1 font-bold text-3xl">
+              <span className="text-xl">$</span>
+              {product.price}.00
+            </p>
           </div>
 
           <div className="colors">

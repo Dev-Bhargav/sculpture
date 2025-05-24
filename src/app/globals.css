@@ -20,3 +20,11 @@ body {
   color: var(--foreground);
   font-family: var(--font-geist-sans);
 }
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
