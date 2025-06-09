@@ -3,7 +3,7 @@ import React from "react";
 
 export default function Footer() {
   return (
-    <div className="bg-[var(--navbar)] flex flex-col items-center py-8 gap-14 mt-10">
+    <div className="bg-[var(--navbar)]  flex flex-col items-center py-8 gap-14 mt-10">
       <div className="text-center ">
         <h1 className="font-black text-3xl md:text-4xl px-2 rounded-sm">
           Desgin Wizards
