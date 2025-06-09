@@ -6,18 +6,24 @@ import PriceFilter from "../components/PriceFilter";
 import Image from "next/image";
 import { SlidersHorizontal } from "lucide-react";
 import MobileFilterSheet from "../components/MobileFilterSheet";
-import products from "../data/products";
 import Link from "next/link";
+import { getProducts } from "@/lib/shopify";
 
 export default function Page() {
   const [showFilter, setShowFilter] = useState(false);
   const [sortOption, setSortOption] = useState("");
   const [filterOption, setFilterOption] = useState("");
-  const [productData, setProductsData] = useState([...products]);
+  const [productData, setProductsData] = useState([]);
   const [selected, setSelected] = useState(null);
 
   useEffect(() => {
-    let updatedData = [...products];
+    async function loadProducts() {
+      const productsFromShopify = await getProducts();
+      setProductsData(productsFromShopify);
+    }
+    loadProducts();
+
+    let updatedData = [productData];
 
     if (filterOption) {
       updatedData = updatedData.filter((item) => {
@@ -85,7 +91,11 @@ export default function Page() {
             <h1 className="font-bold text-lg">FILTER & SORT</h1>
             <button
               onClick={removeFilter}
-              className={`text-sm ${ filterOption || sortOption ? "text-gray-500 cursor-pointer" : "text-gray-300 cursor-not-allowed"}`}
+              className={`text-sm ${
+                filterOption || sortOption
+                  ? "text-gray-500 cursor-pointer"
+                  : "text-gray-300 cursor-not-allowed"
+              }`}
             >
               Clear all
             </button>
@@ -123,22 +133,28 @@ export default function Page() {
           <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:justify-start gap-x-2 lg:gap-x-5 gap-y-9 lg:gap-10 py-3 px-4">
             {productData.map((product, index) => (
               <Link
+                key={index}
                 href={`/shop/${product.slug}`}
                 className="cursor-pointer"
-                key={index}
               >
                 <div className="h-fit bg-[#F2F2F2] rounded-t-sm px-2 flex justify-center">
-                  <Image
-                    src={product.src}
-                    height={100}
-                    width={100}
-                    className="w-[24vw] h-[42vw] md:h-[30vw] lg:h-[18vw] object-contain"
-                    alt={product.name}
-                  />
+                  {product.src ? (
+                    <Image
+                      src={product.src}
+                      alt={product.altText || product.name}
+                      height={100}
+                      width={100}
+                      className="w-[24vw] h-[42vw] md:h-[30vw] lg:h-[18vw] object-contain"
+                    />
+                  ) : (
+                    <div className="w-[24vw] h-[42vw] md:h-[30vw] lg:h-[18vw] flex items-center justify-center text-sm text-gray-400">
+                      
+                    </div>
+                  )}
                 </div>
                 <div className="rounded-b-sm px-2">
                   <p className="text-lg">{product.name}</p>
-                  <p className="text-md opacity-70">${product.price}.00</p>
+                  <p className="text-md opacity-70">₹{product.price}.00</p>
                 </div>
               </Link>
             ))}
