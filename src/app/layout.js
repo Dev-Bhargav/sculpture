@@ -2,6 +2,7 @@ import { Geist, Geist_Mono, Libre_Franklin } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar";
 import Footer from "./components/Footer";
+import ProductFilterProvider from "@/context/ProductFilterContext";
 
 const libreFranklin = Libre_Franklin({
   variable: "--font-libre-franklin",
@@ -30,8 +31,8 @@ export default function RootLayout({ children }) {
         className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
         <Navbar></Navbar>
-        {children}
-        <Footer/>
+        <ProductFilterProvider>{children}</ProductFilterProvider>
+        <Footer />
       </body>
     </html>
   );

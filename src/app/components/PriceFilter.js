@@ -1,9 +1,7 @@
-"use client";
-
-import React, { useState } from "react";
+import React from "react";
 
 export default function PriceFilter({filterOption,setFilterOption, selected, setSelected }) {
-  const prices = ["$0-$10", "$10-$20", "$20-$30", "$30-$40", "$40-$50"];
+  const prices = ["₹0-₹500", "₹500-₹1000", "₹1000-₹1500", "₹1500-₹2000", "₹2000-₹2500"];
 
   const handleClick = (e, index) => {
     if (filterOption != e.target.value){
@@ -24,7 +22,7 @@ export default function PriceFilter({filterOption,setFilterOption, selected, set
       {prices.map((price, index) => (
         <label
           key={index}
-          className={`inline-flex justify-center border-2 w-20 py-1 rounded-sm cursor-pointer
+          className={`w-fit inline-flex justify-center border-2 py-1 px-2 rounded-sm cursor-pointer
             ${
               selected == index
                 ? "bg-[var(--primary)] border-[var(--primary)] text-white"

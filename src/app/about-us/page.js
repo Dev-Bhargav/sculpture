@@ -1,3 +1,5 @@
+import Link from "next/link";
+
 export default function AboutPage() {
   return (
     <div className="max-w-4xl mx-auto px-4 py-12">
@@ -34,7 +36,7 @@ export default function AboutPage() {
 
       <h2 className="text-2xl font-semibold mb-2">Let’s Connect</h2>
       <p className="text-gray-700">
-        {"Whether you're an artist, collector, or curious admirer — we'd love to hear from you. Reach out via our"} <a href="/contact" className="text-blue-600 underline">Contact Page</a>, or follow us on <a href="#" className="text-blue-600 underline">Instagram</a> to stay inspired.
+        {"Whether you're an artist, collector, or curious admirer — we'd love to hear from you. Reach out via our"} <Link href="/contact" className="text-[var(--primary)] underline">Contact Page</Link>, or follow us on <Link href="#" className="text-[var(--primary)] underline">Instagram</Link> to stay inspired.
       </p>
     </div>
   );

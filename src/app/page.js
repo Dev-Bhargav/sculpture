@@ -1,56 +1,12 @@
-"use client";
-
 import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useEffect, useRef, useState } from "react";
-import products from "./data/products";
+import { getProducts } from "@/lib/shopify";
+import ShopButton from "./components/ShopButton";
 
-export default function Home() {
-  const [clicked, setClicked] = useState(false);
-  const [disableRight, setDisableRight] = useState(false);
-  const router = useRouter();
+export default async function Home() {
+  const products = await getProducts();
 
-  const scrollRef = useRef(null);
-
-  let scrollVal = 366;
-
-  const handleScroll = () => {
-    const el = scrollRef.current;
-    if (!el) return;
-    const scrollRemaining = el.scrollWidth - el.scrollLeft - el.clientWidth;
-    console.log(scrollVal)
-    if (scrollRemaining < 732 && scrollRemaining > 0) {
-      scrollVal = scrollRemaining;
-    } else if (scrollRemaining == 0) {
-      setDisableRight(true);
-      scrollVal = 366;
-    }
-  };
-
-  useEffect(() => {
-    handleScroll();
-  });
-
-  const scrollRight = () => {
-    if (scrollRef.current) {
-      handleScroll();
-      scrollRef.current.scrollBy({ left: scrollVal, behavior: "smooth" });
-    }
-  };
-
-  const scrollLeft = () => {
-    if (scrollRef.current) {
-      // handleScroll()
-      scrollRef.current.scrollBy({ left: -scrollVal, behavior: "smooth" });
-    }
-  };
-
-  const handleClick = () => {
-    setClicked(true);
-    router.push("/shop");
-  };
   return (
     <>
       <section className="flex">
@@ -704,26 +660,14 @@ export default function Home() {
             >
               Learn More
             </Link>
-            <button
-              onClick={handleClick}
-              className={`inline-flex w-fit items-center justify-center ${
-                clicked ? "px-2" : "gap-3 px-3"
-              } text-lg bg-[var(--primary)] text-white py-2 rounded-full cursor-pointer`}
-            >
-              {!clicked && <span>Shop Now</span>}
-              <ArrowRight
-                color="var(--primary)"
-                size={10}
-                className="bg-white rounded-full h-6 w-6"
-              />
-            </button>
+            <ShopButton />
           </div>
         </div>
       </section>
       <section className="mx-4 mt-10">
         <div>
-          <div className="flex justify-between items-center px-3 ">
-            <div className="inline-flex gap-8">
+          <div className="flex justify-between px-3 gap-4">
+            <div className="w-full flex justify-between items-end">
               <h1 className="text-2xl lg:text-3xl font-bold"> New Arrival</h1>
               <Link
                 className="text-lg inline-flex items-center gap-1 text-[var(--primary)] underline underline-offset-2"
@@ -733,25 +677,18 @@ export default function Home() {
               </Link>
             </div>
             <div className="inline-flex gap-3">
-              <button
-                onClick={scrollLeft}
-                className="bg-neutral-200 p-1 rounded-full cursor-pointer"
-              >
+              <button className="bg-neutral-200 p-1 rounded-full cursor-pointer">
                 <ArrowLeft color="black" />
               </button>
               <button
-                className={`p-1 rounded-full cursor-pointer ${
-                  disableRight ? "bg-red-400" : "bg-neutral-200"
+                className={`p-1 rounded-full cursor-pointer bg-neutral-200
                 }`}
               >
-                <ArrowRight onClick={scrollRight} color="black" />
+                <ArrowRight color="black" />
               </button>
             </div>
           </div>
-          <div
-            ref={scrollRef}
-            className="flex gap-4 py-5 px-[47px] mx-3 overflow-x-auto no-scrollbar"
-          >
+          <div className="flex gap-4 py-5 px-[47px] mx-3 overflow-x-auto no-scrollbar">
             {products.map((product, index) => (
               <Link
                 href={`/shop/${product.slug}`}

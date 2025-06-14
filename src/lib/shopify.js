@@ -1,58 +1,17 @@
-const domain = "x0jy0f-2a.myshopify.com";
-const storefrontAccessToken = "67a0618f67f86ccdfa4cbd75ef6bea11";
+import products from "@/app/data/products";
 
 export async function getProducts() {
-  const response = await fetch(`https://${domain}/api/2023-01/graphql.json`, {
-    method: "POST",
-    headers: {
-      "X-Shopify-Storefront-Access-Token": storefrontAccessToken,
-      "Content-Type": "application/json",
-    },
-    body: JSON.stringify({
-      query: `
-    {
-      products(first: 20) {
-        edges {
-          node {
-            id
-            title
-            description
-            handle
-            priceRange {
-              minVariantPrice {
-                amount
-                currencyCode
-              }
-            }
-            images(first: 1) {
-              edges {
-                node {
-                  url
-                  altText
-                }
-              }
-            }
-          }
-        }
-      }
+  try {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/api/products`);
+    if (!res.ok){
+      console.log(res.status)
+      return products
     }
-  `,
-    }),
-  });
-
-  const json = await response.json();
-  if(json.errors){
-    console.error(json.error)
-    return[]
+    console.log("Entering")
+    return await res.json();
+  } catch (e) {
+    console.log("here here")
+    console.error(e);
+    return [];
   }
-   return json.data.products.edges.map(({ node }) => ({
-    id: node.id,
-    name: node.title,
-    slug: node.handle,
-    description: node.description,
-    price: parseFloat(node.priceRange.minVariantPrice.amount),
-    currency: node.priceRange.minVariantPrice.currencyCode,
-    src: node.images?.edges?.[0].node.url || null, // fallback empty string if no image
-    altText: node.images.edges[0]?.node.altText || node.title,
-  })); 
 }

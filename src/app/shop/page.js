@@ -7,37 +7,53 @@ import Image from "next/image";
 import { SlidersHorizontal } from "lucide-react";
 import MobileFilterSheet from "../components/MobileFilterSheet";
 import Link from "next/link";
+import { useProductFilter } from "@/context/ProductFilterContext";
 import { getProducts } from "@/lib/shopify";
 
 export default function Page() {
-  const [showFilter, setShowFilter] = useState(false);
-  const [sortOption, setSortOption] = useState("");
-  const [filterOption, setFilterOption] = useState("");
   const [productData, setProductsData] = useState([]);
-  const [selected, setSelected] = useState(null);
+  const [filteredProductData, setFilteredProductsData] = useState([]);
+  const [showFilter, setShowFilter] = useState(false);
+  const {
+    sortOption,
+    setSortOption,
+    filterOption,
+    setFilterOption,
+    selected,
+    setSelected,
+    resetFilter,
+  } = useProductFilter();
 
   useEffect(() => {
     async function loadProducts() {
-      const productsFromShopify = await getProducts();
-      setProductsData(productsFromShopify);
+      try {
+        const products = await getProducts();
+        setProductsData(products);
+      } catch (error) {
+        console.error("Failed to load products:", error);
+        setProductsData([]);
+      }
     }
-    loadProducts();
 
-    let updatedData = [productData];
+    loadProducts();
+  }, []);
+
+  useEffect(() => {
+    let updatedData = [...productData];
 
     if (filterOption) {
       updatedData = updatedData.filter((item) => {
         switch (filterOption) {
-          case "$0-$10":
-            return item.price <= 10;
-          case "$10-$20":
-            return item.price > 10 && item.price <= 20;
-          case "$20-$30":
-            return item.price > 20 && item.price <= 30;
-          case "$30-$40":
-            return item.price > 30 && item.price <= 40;
-          case "$40-$50":
-            return item.price > 40 && item.price <= 50;
+          case "₹0-₹500":
+            return item.price <= 500;
+          case "₹500-₹1000":
+            return item.price > 500 && item.price <= 1000;
+          case "₹1000-₹1500":
+            return item.price > 1000 && item.price <= 1500;
+          case "₹1500-₹2000":
+            return item.price > 1500 && item.price <= 2000;
+          case "₹2000-₹2500":
+            return item.price > 2000 && item.price <= 2500;
           default:
             return true;
         }
@@ -56,14 +72,8 @@ export default function Page() {
       });
     }
 
-    setProductsData(updatedData);
-  }, [sortOption, filterOption]);
-
-  const removeFilter = () => {
-    setFilterOption("");
-    setSortOption("");
-    setSelected(null);
-  };
+    setFilteredProductsData(updatedData);
+  }, [sortOption, filterOption, productData]);
 
   return (
     <div>
@@ -85,12 +95,12 @@ export default function Page() {
         sortOption={sortOption}
       />
 
-      <div className="flex justify-between lg:justify-normal gap-4 lg:gap-10 lg:px-10 lg:mt-10">
+      <div className="flex justify-between lg:justify-normal gap-4 lg:gap-10 lg:px-10 lg:mt-12">
         <div className="h-fit w-[300px] min-w-[230px] py-3 hidden lg:block">
           <div className="flex justify-between items-center py-3 border-b-1 border-gray-300">
             <h1 className="font-bold text-lg">FILTER & SORT</h1>
             <button
-              onClick={removeFilter}
+              onClick={resetFilter}
               className={`text-sm ${
                 filterOption || sortOption
                   ? "text-gray-500 cursor-pointer"
@@ -129,9 +139,12 @@ export default function Page() {
             </div>
           </div>
         </div>
-        <div className="w-full lg:w-[70vw]">
-          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:justify-start gap-x-2 lg:gap-x-5 gap-y-9 lg:gap-10 py-3 px-4">
-            {productData.map((product, index) => (
+        <div className="w-full lg:w-[80vw] ">
+          <div className="grid grid-cols-2 md:grid-cols-3 xl:grid-cols-4 lg:justify-start gap-x-2 lg:gap-x-5 gap-y-2 lg:gap-y-4 py-3 px-4">
+            {(filterOption || sortOption
+              ? filteredProductData
+              : productData
+            ).map((product, index) => (
               <Link
                 key={index}
                 href={`/shop/${product.slug}`}
@@ -147,14 +160,14 @@ export default function Page() {
                       className="w-[24vw] h-[42vw] md:h-[30vw] lg:h-[18vw] object-contain"
                     />
                   ) : (
-                    <div className="w-[24vw] h-[42vw] md:h-[30vw] lg:h-[18vw] flex items-center justify-center text-sm text-gray-400">
-                      
-                    </div>
+                    <div className="w-[24vw] h-[42vw] md:h-[30vw] lg:h-[18vw] flex items-center justify-center text-sm text-gray-400"></div>
                   )}
                 </div>
                 <div className="rounded-b-sm px-2">
-                  <p className="text-lg">{product.name}</p>
-                  <p className="text-md opacity-70">₹{product.price}.00</p>
+                  <p className="sm:text-lg">{product.name}</p>
+                  <p className="text-sm sm:text-md opacity-70">
+                    ₹{product.price}.00
+                  </p>
                 </div>
               </Link>
             ))}

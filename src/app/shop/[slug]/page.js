@@ -13,7 +13,7 @@ export default async function page({ params }) {
   }
 
   return (
-    <section className="w-full mt-12 lg:mt-20 px-5 sm:px-10 lg:px-20">
+    <section className="w-full mt-12 px-5 sm:px-10 lg:px-20">
       <div className="w-full flex flex-col lg:flex-row gap-10">
         <div className="image lg:w-1/2">
           <div className="bg-[#e2e2e2] xl:max-w-[950px] rounded-sm py-4">
