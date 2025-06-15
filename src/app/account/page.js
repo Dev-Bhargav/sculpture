@@ -4,6 +4,7 @@ import { supabase } from "@/lib/supabaseClient";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { LogOut, User2 } from "lucide-react";
+import UserStatus from "../components/UserStatus";
 
 export default function AccountPage() {
   const [user, setUser] = useState(null);
@@ -36,7 +37,7 @@ export default function AccountPage() {
     <div className="min-h-[80vh] flex flex-col items-center justify-center px-4 text-center">
       <div className="bg-white rounded-lg p-8 w-full max-w-md">
         <div className="flex flex-col items-center gap-2 mb-6">
-          <User2 size={40} className="text-[var(--primary)]" />
+          <UserStatus/>
           <h1 className="text-2xl font-bold">Welcome</h1>
           <p className="text-gray-600">{user.email}</p>
         </div>

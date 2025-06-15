@@ -14,7 +14,7 @@ export default function Navbar() {
       <div className="flex items-center gap-12">
         <Link
           href="/"
-          className="font-black text-xl sm:text-2xl md:text-4xl px-2 rounded-sm"
+          className="font-black text-2xl sm:text-2xl md:text-4xl sm:px-2 rounded-sm"
         >
           Desgin Wizards
           <span className="text-[var(--primary)] font-[--font-geist-sans]">
