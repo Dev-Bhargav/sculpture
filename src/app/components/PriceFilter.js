@@ -1,15 +1,25 @@
 import React from "react";
 
-export default function PriceFilter({filterOption,setFilterOption, selected, setSelected }) {
-  const prices = ["₹0-₹500", "₹500-₹1000", "₹1000-₹1500", "₹1500-₹2000", "₹2000-₹2500"];
-
+export default function PriceFilter({
+  filterOption,
+  setFilterOption,
+  selected,
+  setSelected,
+}) {
+  const prices = [
+    "₹0-₹500",
+    "₹500-₹1000",
+    "₹1000-₹1500",
+    "₹1500-₹2000",
+    "₹2000-₹2500",
+  ];
   const handleClick = (e, index) => {
-    if (filterOption != e.target.value){
-      setFilterOption(e.target.value)
-    }else{
-      setFilterOption(null)
+    if (filterOption != e.target.value) {
+      setFilterOption(e.target.value);
+    } else {
+      setFilterOption(null);
     }
-    
+
     if (selected === index) {
       setSelected(null);
     } else {
@@ -35,7 +45,10 @@ export default function PriceFilter({filterOption,setFilterOption, selected, set
             name="filter"
             value={price}
             className="peer hidden"
-            onClick={(e) => handleClick(e, index)}
+            onClick={(e) => {
+              handleClick(e, index);
+
+            }}
           />
           <span className="select-none">{price}</span>
         </label>

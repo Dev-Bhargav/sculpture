@@ -11,7 +11,7 @@ export default function Footer() {
             .
           </span>
         </h1>
-        <p className="bg[#828282] text-sm py-2">
+        <p className="bg[#828282] text-sm py-2 px-1">
           © 2025 Your Website Name. Crafted with care for sculpture lovers.
         </p>
       </div>

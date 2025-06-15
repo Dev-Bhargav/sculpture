@@ -6,7 +6,6 @@ import ShopButton from "./components/ShopButton";
 
 export default async function Home() {
   const products = await getProducts();
-
   return (
     <>
       <section className="flex">
@@ -656,7 +655,7 @@ export default async function Home() {
           <div className="flex items-center gap-4 lg:ml-20 mt-4">
             <Link
               href="/about-us"
-              className="text-lg underline underline-offset-2 text-[var(--primary)]"
+              className="md:text-lg underline underline-offset-2 text-[var(--primary)]"
             >
               Learn More
             </Link>
@@ -676,19 +675,8 @@ export default async function Home() {
                 See all <ArrowRight size={15} />
               </Link>
             </div>
-            <div className="inline-flex gap-3">
-              <button className="bg-neutral-200 p-1 rounded-full cursor-pointer">
-                <ArrowLeft color="black" />
-              </button>
-              <button
-                className={`p-1 rounded-full cursor-pointer bg-neutral-200
-                }`}
-              >
-                <ArrowRight color="black" />
-              </button>
-            </div>
           </div>
-          <div className="flex gap-4 py-5 px-[47px] mx-3 overflow-x-auto no-scrollbar">
+          <div className="flex gap-4 py-5 px-[20px] mx-3 overflow-x-auto no-scrollbar">
             {products.map((product, index) => (
               <Link
                 href={`/shop/${product.slug}`}
@@ -706,7 +694,7 @@ export default async function Home() {
                 </div>
                 <div className="rounded-b-sm px-2">
                   <p className="text-lg">{product.name}</p>
-                  <p className="text-md opacity-70">${product.price}.00</p>
+                  <p className="text-md opacity-70">₹{product.price}.00</p>
                 </div>
               </Link>
             ))}

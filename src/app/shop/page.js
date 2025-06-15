@@ -93,6 +93,10 @@ export default function Page() {
         onClose={() => setShowFilter(false)}
         setSortOption={setSortOption}
         sortOption={sortOption}
+        filterOption={filterOption}
+        selected={selected}
+        setSelected={setSelected}
+        setFilterOption={setFilterOption}
       />
 
       <div className="flex justify-between lg:justify-normal gap-4 lg:gap-10 lg:px-10 lg:mt-12">
@@ -127,7 +131,7 @@ export default function Page() {
               />
             </div>
           </div>
-          <div className="mt-3 py-3 border-b-1 border-gray-300">
+          <div className="py-3 border-b-1 border-gray-300">
             <h1 className="font-bold text-lg">PRICE</h1>
             <div className="m-3">
               <PriceFilter
@@ -150,14 +154,14 @@ export default function Page() {
                 href={`/shop/${product.slug}`}
                 className="cursor-pointer"
               >
-                <div className="h-fit bg-[#F2F2F2] rounded-t-sm px-2 flex justify-center">
+                <div className="h-fit py-2 bg-[#F2F2F2] rounded-t-sm px-2 flex justify-center">
                   {product.src ? (
                     <Image
                       src={product.src}
                       alt={product.altText || product.name}
                       height={100}
                       width={100}
-                      className="w-[24vw] h-[42vw] md:h-[30vw] lg:h-[18vw] object-contain"
+                      className="w-[24vw] lg:w-[15vw] h-[42vw] md:h-[30vw] lg:h-[17vw] object-contain"
                     />
                   ) : (
                     <div className="w-[24vw] h-[42vw] md:h-[30vw] lg:h-[18vw] flex items-center justify-center text-sm text-gray-400"></div>

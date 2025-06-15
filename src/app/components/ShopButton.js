@@ -13,7 +13,7 @@ export default function ShopButton() {
       onClick={() => setClicked(true)}
       className={`inline-flex w-fit items-center justify-center ${
         clicked ? "px-2" : "gap-3 px-3"
-      } text-lg bg-[var(--primary)] text-white py-2 rounded-full cursor-pointer`}
+      } md:text-lg bg-[var(--primary)] text-white py-2 rounded-full cursor-pointer`}
     >
       {!clicked && <span>Shop Now</span>}
       <ArrowRight

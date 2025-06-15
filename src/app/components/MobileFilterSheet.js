@@ -10,6 +10,10 @@ export default function MobileFilterSheet({
   onClose,
   setSortOption,
   sortOption,
+  filterOption,
+  selected,
+  setSelected,
+  setFilterOption
 }) {
   // Prevent background scroll when open
   useEffect(() => {
@@ -23,17 +27,21 @@ export default function MobileFilterSheet({
     };
   }, [show]);
 
+  useEffect(()=>{
+    console.log("Mounted")
+  },[])
+
   return (
     <>
       {show && (
         <div
-          className="fixed inset-0 bg-black opacity-60 z-40 lg:hidden"
+          className="fixed inset-0 bg-black opacity-60 z-90 lg:hidden"
           onClick={onClose}
         />
       )}
 
       <div
-        className={`fixed bottom-0 left-0 right-0 z-50 bg-[var(--background)] rounded-t-xl shadow-xl transition-transform duration-300 ${
+        className={`fixed bottom-0 left-0 right-0 z-100 bg-[var(--background)] rounded-t-xl shadow-xl transition-transform duration-300 ${
           show ? "translate-y-0" : "translate-y-full"
         } lg:hidden`}
       >
@@ -61,7 +69,12 @@ export default function MobileFilterSheet({
               />
             </div>
             <h3 className="font-semibold text-lg mt-4">Price</h3>
-            <PriceFilter />
+            <PriceFilter
+              filterOption={filterOption}
+              selected={selected}
+              setSelected={setSelected}
+              setFilterOption={setFilterOption}
+            />
           </div>
         </div>
       </div>

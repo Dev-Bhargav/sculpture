@@ -4,6 +4,7 @@ import { AlignJustify } from "lucide-react";
 import Link from "next/link";
 import React, { useState } from "react";
 import MobileNavbar from "./MobileNavbar";
+import UserStatus from "./UserStatus";
 
 export default function Navbar() {
   const [show, setShow] = useState(false);
@@ -13,9 +14,12 @@ export default function Navbar() {
       <div className="flex items-center gap-12">
         <Link
           href="/"
-          className="font-black text-3xl md:text-4xl px-2 rounded-sm"
+          className="font-black text-xl sm:text-2xl md:text-4xl px-2 rounded-sm"
         >
-          Desgin Wizards<span className="text-[var(--primary)] text-[40px] font-[--font-geist-sans]">.</span>
+          Desgin Wizards
+          <span className="text-[var(--primary)] font-[--font-geist-sans]">
+            .
+          </span>
         </Link>
         <nav className="hidden md:block">
           <ul className="flex gap-6 font-semibold">
@@ -31,10 +35,10 @@ export default function Navbar() {
           </ul>
         </nav>
       </div>
-      <button className="bg-[#FF4E14] text-white font-bold py-1 px-7 rounded-sm cursor-pointer hidden md:block">
-        Log in
-      </button>
-      <AlignJustify className="md:hidden" onClick={() => setShow(true)} />
+      <div className="flex items-center gap-3">
+        <UserStatus />
+        <AlignJustify className="md:hidden" onClick={() => setShow(true)} />
+      </div>
       <MobileNavbar show={show} onClose={() => setShow(false)} />
     </div>
   );

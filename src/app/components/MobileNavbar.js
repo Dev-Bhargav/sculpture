@@ -1,13 +1,25 @@
+"useClient"
+
 import { X } from "lucide-react";
 import Link from "next/link";
-import React from "react";
+import React, { useEffect } from "react";
 
 export default function MobileNavbar({ show, onClose }) {
+  useEffect(() => {
+      if (show) {
+        document.body.style.overflow = "hidden";
+      } else {
+        document.body.style.overflow = "unset";
+      }
+      return () => {
+        document.body.style.overflow = "unset";
+      };
+    }, [show]);
   return (
     <>
       <div
-        className={`fixed h-full top-0 left-0 right-0 z-50 bg-[var(--background)] rounded-b-xl shadow-xl transition-transform duration-300 ${
-          show ? "translate-y-0" : "-translate-y-full"
+        className={`fixed inset-0 z-50 bg-[var(--background)] rounded-b-xl shadow-xl transition-transform duration-300 ${
+          show ? "translate-y-0 " : "-translate-y-full"
         } lg:hidden`}
       >
         <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 bg-[var(--primary)] rounded-full shadow p-2">
@@ -38,6 +50,7 @@ export default function MobileNavbar({ show, onClose }) {
                 About us
               </Link>
             </ul>
+            
           </nav>
         </div>
       </div>

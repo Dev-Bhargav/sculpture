@@ -28,10 +28,14 @@ export default function RootLayout({ children }) {
   return (
     <html lang="en">
       <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased dark`}
+        className={`min-h-screen flex flex-col ${geistSans.variable} ${geistMono.variable} antialiased dark`}
       >
-        <Navbar></Navbar>
-        <ProductFilterProvider>{children}</ProductFilterProvider>
+        <Navbar />
+
+        <main className="flex-grow">
+          <ProductFilterProvider>{children}</ProductFilterProvider>
+        </main>
+
         <Footer />
       </body>
     </html>
