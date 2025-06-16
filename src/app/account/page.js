@@ -39,11 +39,11 @@ export default function AccountPage() {
     <div className="min-h-[80vh] flex flex-col items-center justify-center px-4 text-center">
       <div className="bg-white rounded-lg p-8 w-full max-w-md">
         <div className="flex flex-col items-center gap-2 mb-6">
-          {avatarUrl ? (
+          {avatar_url ? (
           <Image
             width={100}
             height={100}
-            src={avatarUrl}
+            src={avatar_url}
             alt="User Avatar"
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"
