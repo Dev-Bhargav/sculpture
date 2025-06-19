@@ -53,7 +53,7 @@ export default async function page({ params }) {
             <p className="text-[#828282] px-2">{product.description}</p>
           </div>
           <button className="bg-[#FF4E14] w-full text-white rounded-sm font-semibold py-2 px-7 lg:rounded-sm cursor-pointer ">
-            Buy Now
+            Contact - +919449329941
           </button>
         </div>
       </div>

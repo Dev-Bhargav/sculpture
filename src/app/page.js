@@ -1,4 +1,4 @@
-import { ArrowLeft, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
+import { ArrowRight} from "lucide-react";
 import Image from "next/image";
 import Link from "next/link";
 import { getProducts } from "@/lib/shopify";
@@ -28,11 +28,10 @@ export default async function Home() {
               <ShopButton />
             </div>
           </div>
-          <div className="w-fit h-fit">
+          <div className="relative w-full lg:w-2/4 aspect-[3/2] bg-[#F2F2F2] rounded-sm">
             <Image
-              src="/images/home-banner.jpg"
-              width={1000}
-              height={400}
+              src="/images/home-banner.jpeg"
+              fill
               className="w-full max-w-[1000px] h-auto object-cover rounded-sm"
               alt="Home Banner"
             />
